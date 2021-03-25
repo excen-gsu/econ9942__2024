@@ -1,0 +1,50 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Public Goods Demo -- Contribution
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    Round {{ subsession.round_number }} of {{ Constants.num_rounds }}.
+    <br><br>
+    Your endowment is {{ Constants.endowment }}
+    <br><br>
+    The group MPCR is {{ group.MPCR }}
+    <br><br>
+
+    {% formfields %}
+    {% next_button %}
+
+    {% if player.round_number != 1 %}
+    <div class="card-header mb-3 text-center" style="background:#DEF0FC; color:#2E7099">
+        <b>History Table</b>
+    </div>
+
+    <p>
+        <div class="row justify-content-center" style="max-height:40vh; overflow: scroll;">
+            <table class="table" style="width:500px">
+                <tr>
+                    <th class="text-center">Round</th>
+                    <th class="text-center">Your bid</th>
+                </tr>
+                <tbody>
+                {% for p in player.in_previous_rounds %}
+                <tr>
+                    <td class="text-center">{{p.round_number}}</td>
+                    <td class="text-center"> {{p.}}</td>
+                    <td class="text-center">{% if player.id_in_group == 1 %} {{col_action_labels|list_item:p.opp_action}} {% else %} {{row_action_labels|list_item:p.opp_action}} {% endif %}</td>
+                    <td class="text-center">{{p.own_payoff}}</td>
+                    <td class="text-center">{{p.opp_payoff}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+         </div>
+    </p>
+    {% endif %}
+
+
+
+{% endblock %}
