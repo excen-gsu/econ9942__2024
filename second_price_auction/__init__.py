@@ -23,7 +23,7 @@ class Constants(BaseConstants):
     name_in_url = 'second_price_auction'
     players_per_group = 3
     num_rounds = 10
-    timeout_seconds = 1
+    # timeout_seconds = 10
 
 
 class Subsession(BaseSubsession):
@@ -34,13 +34,14 @@ class Group(BaseGroup):
     highest_bid = models.CurrencyField()
     second_highest_bid = models.CurrencyField()
     winner = models.IntegerField()
+    price = models.CurrencyField()
 
 
 class Player(BasePlayer):
     value = models.CurrencyField()
-    bid = models.CurrencyField()
+    bid = models.CurrencyField(initial=0)
     is_winner = models.BooleanField()
-    price = models.CurrencyField()
+    # price = models.CurrencyField()
 
 
 # FUNCTIONS
@@ -71,12 +72,12 @@ def auction_outcome(g: Group):
     # Sort the bids in descending order
     bids.sort(reverse=True)
 
-    # Set the highest and second highest bids to the appropriate group variables
+    # Set the highest and second-highest bids to the appropriate group variables
     # (Python uses 0-based arrays...)
     g.highest_bid = bids[0]
     g.second_highest_bid = bids[1]
 
-    # Tie break
+    # Tiebreak
     # We always do this even when there is not a tie...
     ###########
     # first get the set of player IDs who bid the highest
@@ -97,23 +98,24 @@ def auction_outcome(g: Group):
             p.participant.vars['finished'] = True
         else:
             p.payoff = 0
-        p.price = g.highest_bid
+    g.price = g.second_highest_bid
 
 
 # PAGES
 class Bid(Page):
-    def is_displayed(player):
-        return player.participant.vars['finished']
+    # def is_displayed(player):
+    #     return player.participant.vars['finished']
+
     form_model = 'player'
     form_fields = ['bid']
 
-    def get_timeout_seconds(player):
-        return Constants.timeout_seconds  # in seconds
-
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        if timeout_happened:
-            player.bid = random.random()*player.value
+    # def get_timeout_seconds(player):
+    #     return Constants.timeout_seconds  # in seconds
+    #
+    # @staticmethod
+    # def before_next_page(player, timeout_happened):
+    #     if timeout_happened:
+    #         player.bid = random.random()*player.value
 
 
 class ResultsWaitPage(WaitPage):
@@ -122,10 +124,10 @@ class ResultsWaitPage(WaitPage):
 
 
 class Results(Page):
-
-    @staticmethod
-    def get_timeout_seconds(player):
-        return Constants.timeout_seconds
+    pass
+    # @staticmethod
+    # def get_timeout_seconds(player):
+    #     return Constants.timeout_seconds
 
     # @staticmethod
     # def before_next_page(player, timeout_happened):

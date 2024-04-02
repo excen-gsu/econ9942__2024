@@ -24,7 +24,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     A = models.IntegerField(min=1, max=3, label='Enter integer between 1 and 3 inclusive')
 
-    B = models.IntegerField(choices=[0, 1, 2, 3])
+    B = models.IntegerField(choices=[1, 2, 3])
 
     C = models.IntegerField(choices=[[1, 'apple'],
                                      [2, 'banana'],

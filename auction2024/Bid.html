@@ -1,0 +1,31 @@
+{{ block title }}
+    Page title
+{{ endblock }}
+{{ block content }}
+    <style>
+        .my_style {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            {#letter-spacing: 2px;#}
+            {#word-spacing: 2px;#}
+            {#color: blue;#}
+            {#font-weight: normal;#}
+            {#text-decoration: none;#}
+            {#font-style: normal;#}
+            {#font-variant: normal;#}
+            {#text-transform: none;#}
+            }
+    </style>
+
+    <div  class="my_style" style="width: 200px; border: 5px solid black;">
+        <p>
+        You are one of {{ C.PLAYERS_PER_GROUP }} players who are bidding in an auction. Your value of the good is {{ player.value }}.
+        <br><br>
+    </p>
+    </div>
+
+
+    {{ formfields }}
+    {{ next_button }}
+
+{{ endblock }}

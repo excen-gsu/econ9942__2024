@@ -1,4 +1,5 @@
 from otree.api import *
+import random
 
 c = Currency
 
@@ -22,25 +23,60 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    type = models.StringField()
 
 
 # FUNCTIONS
 
-def creating_session(subsession):
-    pass
-    # print('in creating session')
-    # print('round', subsession.round_number, 'group matrix is', subsession.get_group_matrix())
+def creating_session(s):
+
+    print('-----------------------------')
+    print('round ' + str(s.round_number) + ' default group matrix')
+    m = s.get_group_matrix()
+    print(m)
+
+    ungrouped_second_movers = []
+
+    for row in m:
+        ungrouped_second_movers.append(row[1])
+        ungrouped_second_movers.append(row[2])
+
+    new_m = []
+
+    for row in m:
+        p1 = row[0]
+        p2 = ungrouped_second_movers.pop(random.randrange(len(ungrouped_second_movers)))
+        p3 = ungrouped_second_movers.pop(random.randrange(len(ungrouped_second_movers)))
+        new_m.append([p1, p2, p3])
+
+    s.set_group_matrix(new_m)
+
+    print('round ' + str(s.round_number) + ' modified group matrix')
+    print(s.get_group_matrix())
+    # print('-----------------------------')
 
 
-def regroup(subsession):
-    for subses in [subsession.in_round(x) for x in range(1, Constants.num_rounds)]:
-        rnd = subses.round_number
-        mtx = subses.get_group_matrix()
-        print(rnd, mtx)
-        new_mtx = [[1],[2,3],[4,5,6]]
-        subses.set_group_matrix(new_mtx)
-        print(rnd, subses.get_group_matrix())
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def regroup(subsession):
+#     for subses in [subsession.in_round(x) for x in range(1, Constants.num_rounds)]:
+#         rnd = subses.round_number
+#         mtx = subses.get_group_matrix()
+#         print(rnd, mtx)
+#         new_mtx = [[1],[2,3],[4,5,6]]
+#         subses.set_group_matrix(new_mtx)
+#         print(rnd, subses.get_group_matrix())
 
 
 

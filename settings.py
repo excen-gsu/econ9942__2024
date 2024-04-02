@@ -2,24 +2,36 @@ from os import environ
 
 
 SESSION_CONFIGS = [
-    # dict(
-    #     name='pub_goods_test',
-    #     display_name='my pub goods',
-    #     num_demo_participants=2,
-    #     app_sequence=['my_pub_goods'],
-    # ),
-    # dict(
-    #     name='pub_goods_test_2',
-    #     display_name='my NEW pub goods',
-    #     num_demo_participants=2,
-    #     app_sequence=['my_pub_goods'],
-    # ),
-    # dict(
-    #     name='second_price_auction',
-    #     display_name='second price auction',
-    #     num_demo_participants=3,
-    #     app_sequence=['second_price_auction'],
-    # ),
+    dict(
+        name='drawing_shapes',
+        display_name='drawing simple geometric shapes',
+        num_demo_participants=2,
+        app_sequence=['geoms'],
+    ),
+    dict(
+        name='rock_paper_scissors',
+        display_name='rock paper scissors (2024)',
+        num_demo_participants=2,
+        app_sequence=['rps'],
+    ),
+    dict(
+        name='pub_goods_test',
+        display_name='my pub goods',
+        num_demo_participants=2,
+        app_sequence=['my_pub_goods'],
+    ),
+    dict(
+        name='pub_goods_test_2',
+        display_name='my NEW pub goods',
+        num_demo_participants=2,
+        app_sequence=['my_pub_goods'],
+    ),    dict(
+            name='second_price_auction',
+            display_name='second price auction',
+            num_demo_participants=3,
+            app_sequence=['second_price_auction'],
+        ),
+
     dict(
         name='input_examples',
         display_name='examples of different inputs',
@@ -60,15 +72,39 @@ SESSION_CONFIGS = [
     ),
     dict(
         name='regroup',
-        display_name='demo regrouping subjects during session',
-        num_demo_participants=6,
+        display_name='group matrix manipulation',
+        num_demo_participants=12,
         app_sequence=['regroup'],
     ),
     dict(
-        name='test',
-        display_name='latest thing to test',
+        name='video_demo',
+        display_name='video demo',
         num_demo_participants=2,
-        app_sequence=['testapp'],
+        app_sequence=['video'],
+    ),
+    dict(
+        name='template_looping',
+        display_name='template looping',
+        num_demo_participants=1,
+        app_sequence=['template_looping'],
+    ),
+    dict(
+        name='check_time',
+        display_name='check time',
+        num_demo_participants=1,
+        app_sequence=['check_time'],
+    ),
+    dict(
+        name='custom_waitpage',
+        display_name='custom waitpage example',
+        num_demo_participants=2,
+        app_sequence=['custom_waitpage'],
+    ),
+    dict(
+        name='auction2024',
+        display_name='2024 class example',
+        num_demo_participants=3,
+        app_sequence=['auction2024'],
     ),
 ]
 
@@ -113,8 +149,11 @@ Here are some oTree games.
 """
 
 
+
 SECRET_KEY = '7267278848110'
 
 INSTALLED_APPS = ['otree']
 
 # use_browser_bots = True
+
+

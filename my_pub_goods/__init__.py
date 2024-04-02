@@ -22,7 +22,7 @@ class Constants(BaseConstants):
     players_per_group = 2
     num_rounds = 2
     MPCR1 = 0.4
-    MPCR2 = 0.6
+    MPCR2 = 0.7
     endowment = 100
 
 
@@ -42,7 +42,7 @@ class Player(BasePlayer):
 
 # FUNCTIONS
 
-def creating_session(subsession):
+def creating_session(subsession: Subsession):
     print('in creating session')
     # Establish a total earnings variable for each participant and
     # initialize to 0 at beginning of session.
@@ -56,9 +56,9 @@ def creating_session(subsession):
     for g in subsession.get_groups():
         print('round ', subsession.round_number)
         print('num_rounds/2 ', int(Constants.num_rounds/2))
-        if subsession.round_number <= int(Constants.num_rounds/2): # in first half
+        if subsession.round_number <= int(Constants.num_rounds/2):     # in first half
             g.MPCR = Constants.MPCR1
-        else: # second half
+        else:    # second half
             g.MPCR = Constants.MPCR2
 
 
@@ -78,6 +78,7 @@ def setPayoffs(g: Group):
                                      - p.contribution
                                      + total_contribution*g.MPCR)
         p.participant.vars['totalEarnings'] += p.participant.payoff
+
 
 # PAGES
 class Action(Page):
