@@ -1,0 +1,96 @@
+{#{{ block title }}#}
+{#    Page title#}
+{#{{ endblock }}#}
+{{ block content }}
+
+<div class="container" style="border:1px solid #cecece;">
+
+  <div class="row p-3">
+    <div class="col d-flex justify-content-start">
+      Game {{ subsession.round_number }} of {{ C.NUM_ROUNDS }}
+    </div>
+    <div class="col d-flex justify-content-end">
+      Your earnings: {{ participant.payoff }}
+    </div>
+  </div>
+</div>
+
+      <div style = "text-align:center;">
+          <canvas id="myCanvas" width="700" height="700" style="border:1px solid #000000;"></canvas>
+      </div>
+
+
+    {{ formfields }}
+    {{ next_button }}
+
+{{ endblock }}
+
+{{ block script }}
+    <script>
+        $('document').ready(function(){
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            // draw nfg table using the rect() method
+
+            ctx.rect(200,200,450,450);
+            ctx.rect(350,200,150,450);
+            ctx.rect(200,350,450,150);
+
+            //ctx.strokeStyle = 'red';
+            ctx.stroke();
+
+            ctx.font = "36px Comic Sans MS";
+            ctx.fillStyle = "blue";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+
+            // place the payoffs in the table
+
+            let payoffs = {{ C.PAYOFFS }};
+            console.log(payoffs);
+
+            let pt1 = 275;
+            let pt2 = 425;
+            let pt3 = 575;
+
+            {#ctx.fillText('hello',pt1,pt1)#}
+            {#ctx.fillText('world',pt1,pt3)#}
+            {#ctx.fillText('!',pt3,pt2)#}
+
+            ctx.fillText(payoffs[0][0], pt1, pt1);
+            ctx.fillText(payoffs[0][1], pt2, pt1);
+            ctx.fillText(payoffs[0][2], pt3, pt1);
+
+            ctx.fillText(payoffs[1][0], pt1, pt2);
+            ctx.fillText(payoffs[1][1], pt2, pt2);
+            ctx.fillText(payoffs[1][2], pt3, pt2);
+
+            ctx.fillText(payoffs[2][0], pt1, pt3);
+            ctx.fillText(payoffs[2][1], pt2, pt3);
+            ctx.fillText(payoffs[2][2], pt3, pt3);
+
+            // place the row player action labels
+
+            let actions = {{ C.ACTIONS }};
+
+            ctx.textAlign = "right";
+            ctx.fillText(actions[0], 175, pt1);
+            ctx.fillText(actions[1], 175, pt2);
+            ctx.fillText(actions[2], 175, pt3);
+
+            // place the column player action labels
+            ctx.textAlign = 'center';
+            ctx.fillText(actions[0], pt1, 150);
+            ctx.fillText(actions[1], pt2, 150);
+            ctx.fillText(actions[2], pt3, 150);
+
+
+
+        });
+
+
+
+    </script>
+{{ endblock }}

@@ -1,0 +1,79 @@
+{#{{ block title }}#}
+{#    Page title#}
+{#{{ endblock }}#}
+{{ block content }}
+
+    <canvas id="myCanvas" width="600" height="600" style="border:1px solid #000000;"></canvas>
+
+    <p>You played {{ player.action }}. Your opponent played {{ player.opponent_action }}. Your payoff was {{ player.payoff }}</p>
+
+
+    {{ next_button }}
+
+{{ endblock }}
+
+{{ block script }}
+    <script>
+        $('document').ready(function(){
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            // draw a square using the rect() method
+            ctx.rect(100,100,450,450);
+            ctx.rect(250,100,150,450);
+            ctx.rect(100,250,450,150);
+
+            //ctx.strokeStyle = 'red';
+            ctx.stroke();
+
+            ctx.font = "36px Comic Sans MS";
+            ctx.fillStyle = "red";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+
+
+            // place the payoffs in the table
+
+            let payoffs = {{ C.PAYOFFS }};
+            console.log(payoffs);
+
+            let pt1 = 175;
+            let pt2 = 325;
+            let pt3 = 475;
+
+            ctx.fillText(payoffs[0][0], 175, 175);
+            ctx.fillText(payoffs[0][1], 325, 175);
+            ctx.fillText(payoffs[0][2], 475, 175);
+
+            ctx.fillText(payoffs[1][0], 175, 325);
+            ctx.fillText(payoffs[1][1], 325, 325);
+            ctx.fillText(payoffs[1][2], 475, 325);
+
+            ctx.fillText(payoffs[2][0], 175, 475);
+            ctx.fillText(payoffs[2][1], 325, 475);
+            ctx.fillText(payoffs[2][2], 475, 475);
+
+            // place the row player action labels
+
+            let actions = {{ C.ACTIONS }};
+
+            ctx.textAlign = "right";
+            ctx.fillText(actions[0], 100, 175);
+            ctx.fillText(actions[1], 100, 325);
+            ctx.fillText(actions[2], 100, 475);
+
+            // place the column player action labels
+            ctx.textAlign = 'center';
+            ctx.fillText(actions[0], 175, 50);
+            ctx.fillText(actions[1], 325, 50);
+            ctx.fillText(actions[2], 475, 50);
+
+
+
+        });
+
+
+
+    </script>
+{{ endblock }}
