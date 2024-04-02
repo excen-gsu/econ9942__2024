@@ -3,6 +3,20 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
+        name='regroup',
+        display_name='group matrix manipulation',
+        num_demo_participants=12,
+        app_sequence=['regroup'],
+    ),
+
+    dict(
+        name='sliders',
+        display_name='example using UI sliders',
+        num_demo_participants=1,
+        app_sequence=['sliders'],
+    ),
+
+    dict(
         name='drawing_shapes',
         display_name='drawing simple geometric shapes',
         num_demo_participants=2,
@@ -70,12 +84,7 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['mpl_example'],
     ),
-    dict(
-        name='regroup',
-        display_name='group matrix manipulation',
-        num_demo_participants=12,
-        app_sequence=['regroup'],
-    ),
+
     dict(
         name='video_demo',
         display_name='video demo',

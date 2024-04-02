@@ -23,12 +23,23 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    type = models.StringField()
+    type = models.IntegerField()
 
 
 # FUNCTIONS
 
 def creating_session(s):
+
+    # assign types to players
+
+    for p in s.get_players():
+        if p.id_in_group == 1:
+            p.type = 'first_mover'
+        else:
+            p.type = 'second_mover'
+
+
+    # randomly shuffle all second movers
 
     print('-----------------------------')
     print('round ' + str(s.round_number) + ' default group matrix')
