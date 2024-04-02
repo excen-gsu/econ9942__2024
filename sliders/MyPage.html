@@ -74,6 +74,9 @@
     <script>
 
         document.addEventListener("DOMContentLoaded", function() {
+
+            // get object hooks and update initial values on page load
+
             let slider_1 = document.getElementById("slider_1");
             let output_1 = document.getElementById("output_1");
             output_1.textContent = slider_1.value;
@@ -84,14 +87,13 @@
             output_2.textContent = slider_2.value;
             $("#response_2").val(slider_2.value);
 
+
             // Update both the onscreen numeric output AND hidden field whenever sliders are moved
 
             slider_1.oninput = function() {
               output_1.textContent = this.value;
               $("#response_1").val(slider_1.value);
-
             }
-
             slider_2.oninput = function() {
               output_2.textContent = this.value;
               $("#response_2").val(slider_2.value);

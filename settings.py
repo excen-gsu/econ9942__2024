@@ -15,7 +15,12 @@ SESSION_CONFIGS = [
         num_demo_participants=1,
         app_sequence=['sliders'],
     ),
-
+    dict(
+        name='lists',
+        display_name='UI with two linked and sortable lists',
+        num_demo_participants=1,
+        app_sequence=['lists'],
+    ),
     dict(
         name='drawing_shapes',
         display_name='drawing simple geometric shapes',
