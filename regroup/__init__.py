@@ -52,13 +52,21 @@ def creating_session(s):
         ungrouped_second_movers.append(row[1])
         ungrouped_second_movers.append(row[2])
 
+    print('ungrouped_second_movers: ', ungrouped_second_movers)
+
     new_m = []
+    print('new_group_matrix: ', new_m)
 
     for row in m:
         p1 = row[0]
         p2 = ungrouped_second_movers.pop(random.randrange(len(ungrouped_second_movers)))
+        print('ungrouped_second_movers: ', ungrouped_second_movers)
+
         p3 = ungrouped_second_movers.pop(random.randrange(len(ungrouped_second_movers)))
+        print('ungrouped_second_movers: ', ungrouped_second_movers)
+
         new_m.append([p1, p2, p3])
+        print('new_group_matrix: ', new_m)
 
     s.set_group_matrix(new_m)
 

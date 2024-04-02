@@ -82,14 +82,14 @@
                 // Select the items in list B
                 var list = $('#sortable2 li');
 
-                // Convert the these items to an array
+                // Convert the these items to an JS array
                 var array = $.makeArray(list);
 
                 // Map each item in the array to its innerHTML property
                 let items = array.map((item) => item.innerHTML)
 
                 // Update the innerHTML of the output element with the items in square brackets
-                response = "[ " + items + " ]"
+                response = "[" + items + "]"
 
                 $("#response").val(response);
             }
